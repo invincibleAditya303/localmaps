@@ -1,0 +1,20 @@
+POST http://localhost:3000/register/
+Content-Type: application/json
+
+{
+    "username": "ambika_maloth",
+    "name": "Ambika Maloth",
+    "password": "Invincible@303",
+    "gender": "female",
+    "location": "Tirupati",
+    "profilePic": "https://www.google.co.in/imgres?q=user%20cartoon%20image&imgurl=https%3A%2F%2Fimg.freepik.com%2Fpremium-vector%2Fhappy-young-woman-watching-into-rounded-frame-isolated-white-illustration-render-style_365941-118.jpg&imgrefurl=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fcartoon-user&docid=UjCOxSbYH6vkhM&tbnid=Dl6WEVJTsD17IM&vet=12ahUKEwiEqeHzqqCMAxX_yDgGHR9kIXQQM3oECCwQAA..i&w=626&h=626&hcb=2&ved=2ahUKEwiEqeHzqqCMAxX_yDgGHR9kIXQQM3oECCwQAA"
+}
+###
+
+POST http://localhost:3000/api/login/
+Content-Type: application/json
+
+{
+    "username": "aditya_ammu",
+    "password": "Invincible@303"
+}
