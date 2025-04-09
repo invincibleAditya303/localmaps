@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "engines": {
-      "node": "22.14.0"
+      "node": "20.17.0"
     },
   "scripts": {
     "start": "nodemon --exec babel -node app.js",
