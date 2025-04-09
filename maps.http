@@ -18,3 +18,11 @@ Content-Type: application/json
     "username": "aditya_ammu",
     "password": "Invincible@303"
 }
+###
+
+GET http://localhost:3000/api/dashboard/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkaXR5YV9hbW11IiwiaWF0IjoxNzQyODQwMTA5fQ.R5akHIyN_7CKkN0zArih6yY_xGb2UVgEzDpTvnfT-3c
+###
+
+GET http://localhost:3000/api/map/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkaXR5YV9hbW11IiwiaWF0IjoxNzQyODQwMTA5fQ.R5akHIyN_7CKkN0zArih6yY_xGb2UVgEzDpTvnfT-3c

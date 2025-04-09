@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 app.use(express.json())
 
+require('dotenv').config()
+
 const path = require('path')
 const dbPath = path.join(__dirname, 'maps.db')
 
@@ -22,7 +24,7 @@ const intializeDbAndServer = async () => {
             driver: sqlite3.Database
         })
 
-        app.listen(3000, () => {
+        app.listen(process.env.PORT || 3000, () => {
             console.log('Server running at http://localhost:3000')
         })
     } catch (e) {
@@ -32,7 +34,7 @@ const intializeDbAndServer = async () => {
 
 intializeDbAndServer()
 
-//Add User API
+/*Add User API
 app.post('/register/', async (request, response) => {
     const {username, name, password, location, gender, profilePic} = request.body
 
@@ -72,6 +74,7 @@ app.post('/register/', async (request, response) => {
         response.send('User already exists')
     }
 })
+*/
 
 //Get Login API
 app.post('/api/login/', async (request, response) => {
@@ -126,7 +129,6 @@ const authenticationToken = (request, response, next) => {
                 response.status(401)
                 response.send('Invalid JWT token')
             } else {
-                request.payload = payload
                 next()
             }
         })
@@ -135,21 +137,41 @@ const authenticationToken = (request, response, next) => {
 
 //GET Dashboard API
 app.get('/api/dashboard/', authenticationToken, async (request, response) => {
-    const {payload} = request
-    const {id} = payload
-
-    const getUserQuery = `
+    const getCitiesQuery = `
         SELECT
-            username, location, gender, profile_pic
+            *
         FROM
-            user
-        WHERE
-            id = '${id}';
+            cities;
     `
 
-    const userInfo = await db.get(getUserQuery)
-    response.send(userInfo)
+    const citiesArray = await db.all(getCitiesQuery)
+    response.send(citiesArray)
 })
 
 //GET Map API
-app.get('/api/map/', authenticationToken, async (request, response) => {})
+app.get('/api/map/:cityId', authenticationToken, async (request, response) => {
+    const {id} = request.params
+    
+    const getCityQuery = `
+        SELECT
+            *
+        FROM
+            cities
+        WHERE
+            id = ${id};
+    `
+    const city = await db.get(getCityQuery)
+    const cityName = city.name
+
+    const getCityCoordinates = `
+        SELECT
+            *
+        FROM
+            location
+        WHERE
+            name = '${cityName}';
+    `
+
+    const cityCoordinates = await db.get(getCityCoordinates)
+    response.send(cityCoordinates)
+})
