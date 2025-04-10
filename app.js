@@ -1,11 +1,17 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 app.use(express.json())
+app.use(cors({
+    origin: 'http://localhost:3000', // your frontend origin
+    credentials: true // if you're using cookies
+  }))
 
 require('dotenv').config()
 
 const path = require('path')
 const dbPath = path.join(__dirname, 'maps.db')
+console.log(dbPath)
 
 const {open} = require('sqlite')
 const sqlite3 = require('sqlite3')
