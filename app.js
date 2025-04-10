@@ -114,7 +114,7 @@ app.post('/api/login/', async (request, response) => {
 //Authentication Middleware Function 
 const authenticationToken = (request, response, next) => {
     let jwtToken
-    const authHeader = request.Headers['authorization']
+    const authHeader = request.headers['authorization']
 
     if (authHeader !== undefined) {
         jwtToken = authHeader.split(' ')[1]
@@ -149,7 +149,7 @@ app.get('/api/dashboard/', authenticationToken, async (request, response) => {
 })
 
 //GET Map API
-app.get('/api/map/:cityId', authenticationToken, async (request, response) => {
+app.get('/api/map/:id', authenticationToken, async (request, response) => {
     const {id} = request.params
     
     const getCityQuery = `
