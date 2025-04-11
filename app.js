@@ -112,7 +112,7 @@ app.post('/api/login/', async (request, response) => {
             response.json({ message: 'Authentication successful', jwtToken })
         } else {
             response.status(400)
-            response.send('Invalid Password')
+            response.json({ message:'Invalid Password'})
         }
     }
 })
@@ -128,12 +128,12 @@ const authenticationToken = (request, response, next) => {
 
     if (jwtToken === undefined) {
         response.status(401)
-        response.send('Invalid JWT token')
+        response.json({message: 'Invalid JWT token'})
     } else {
         jwt.verify(jwtToken, 'maps', async (error, payload) => {
             if (error) {
                 response.status(401)
-                response.send('Invalid JWT token')
+                response.json({ message:'Invalid JWT token'})
             } else {
                 next()
             }
@@ -151,7 +151,7 @@ app.get('/api/dashboard/', authenticationToken, async (request, response) => {
     `
 
     const citiesArray = await db.all(getCitiesQuery)
-    response.send(citiesArray)
+    response.json({ message:citiesArray})
 })
 
 //GET Map API
@@ -179,5 +179,5 @@ app.get('/api/map/:id', authenticationToken, async (request, response) => {
     `
 
     const cityCoordinates = await db.get(getCityCoordinates)
-    response.send(cityCoordinates)
+    response.json({ message:cityCoordinates})
 })
