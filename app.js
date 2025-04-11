@@ -151,7 +151,7 @@ app.get('/api/dashboard/', authenticationToken, async (request, response) => {
     `
 
     const citiesArray = await db.all(getCitiesQuery)
-    response.json({ message:citiesArray})
+    response.json({ message: citiesArray})
 })
 
 //GET Map API
@@ -179,5 +179,5 @@ app.get('/api/map/:id', authenticationToken, async (request, response) => {
     `
 
     const cityCoordinates = await db.get(getCityCoordinates)
-    response.json({ message:cityCoordinates})
+    response.json({ message: cityCoordinates})
 })
