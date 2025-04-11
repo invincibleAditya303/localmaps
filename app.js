@@ -109,7 +109,7 @@ app.post('/api/login/', async (request, response) => {
             }
 
             const jwtToken = jwt.sign(payload, 'maps')
-            response.send(jwtToken)
+            response.json({ message: 'Authentication successful', jwtToken })
         } else {
             response.status(400)
             response.send('Invalid Password')
